@@ -1,0 +1,48 @@
+
+
+<!DOCTYPE html>
+<html ng-app="weatherApp">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.16/angular.js" data-semver="1.2.16"></script>
+    <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body ng-controller="weatherCtrl">
+    <form>
+      <div class="form-group">
+        <input class="form-control" type="number" ng-model="zip" placeholder="e.g. 84105" />
+        <input class="btn btn-default" type="submit" value="Search" ng-click="findWeather(zip)" />
+      </div>
+    </form>
+    <p ng-show="zip">Searching the forecasts for: {{zip}}</p>
+    <div>
+      <h1>Forecast For {{ place.location.city }}</h1>
+      <a ng-click="findWeather('84106'); zip = ''">reset</a>
+      <h3><img class="img-thumbnail forecast-img" src="http://l.yimg.com/a/i/us/we/52/{{place.item.condition.code}}.gif" />Current: {{ place.item.condition.text }} | {{ place.item.condition.temp }}°</h3>
+      <div class="row">
+        <div class="col-xs-6" ng-repeat="forecast in place.item.forecast">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h4><img class="img-thumbnail forecast-img" src="http://l.yimg.com/a/i/us/we/52/{{forecast.code}}.gif" /><strong>{{ forecast.date }}</strong></h4>
+            </div>
+            <div class="panel-body">
+              <p>{{ forecast.text }}</p>
+              <p>H: {{ forecast.high }}° | L: {{ forecast.low }}°</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
+
+
